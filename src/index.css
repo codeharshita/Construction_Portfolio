@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-charcoal text-white font-body;
+  }
+  h1, h2, h3, h4 {
+    @apply font-heading tracking-wide;
+  }
+}
+
+@layer components {
+  .text-gold-gradient {
+    @apply bg-gradient-to-r from-gold via-gold-light to-gold-hover bg-clip-text text-transparent;
+  }
+  .gold-border {
+    @apply border-gold border-opacity-30;
+  }
+}
