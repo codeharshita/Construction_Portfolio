@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Phone, Mail, MapPin, Wrench, ArrowRight, CheckCircle } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+
 
 const ContactFooter = () => {
     const [formData, setFormData] = useState({
@@ -8,6 +10,7 @@ const ContactFooter = () => {
         scope: ''
     });
     const [submitted, setSubmitted] = useState(false);
+    const [isSending, setIsSending] = useState(false);
 
     const handleEnquiry = (e) => {
         e.preventDefault();
@@ -19,24 +22,33 @@ const ContactFooter = () => {
             return;
         }
 
-        // Recipients: Amish and Jayantibhai (Placeholder for 2nd email based on user request)
-        const recipients = "amishpatel341@gmail.com"; 
-        const subject = encodeURIComponent(`New Project Inquiry - ${name.toUpperCase()}`);
-        const body = encodeURIComponent(
-            `PATEL CONSTRUCTION - PROJECT INQUIRY\n` +
-            `------------------------------------\n` +
-            `CLIENT NAME: ${name}\n` +
-            `CONTACT/EMAIL: ${contact}\n` +
-            `PROJECT SCOPE: ${scope}\n` +
-            `------------------------------------\n` +
-            `Submitted via Patel Construction SPA Portfolio.`
-        );
+        setIsSending(true);
 
-        // Open Mail Client
-        window.location.href = `mailto:${recipients}?subject=${subject}&body=${body}`;
-        
-        setSubmitted(true);
-        setTimeout(() => setSubmitted(false), 5000);
+        const templateParams = {
+            name: name,
+            contact: contact,
+            message: scope,
+            time: new Date().toLocaleString()
+        };
+
+        emailjs.send(
+            import.meta.env.VITE_EMAILJS_SERVICE_ID,
+            import.meta.env.VITE_EMAILJS_TEMPLATE,
+            templateParams,
+            import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        )
+        .then((response) => {
+            console.log('SUCCESS!', response.status, response.text);
+            setSubmitted(true);
+            setIsSending(false);
+            setFormData({ name: '', contact: '', scope: '' });
+            setTimeout(() => setSubmitted(false), 5000);
+        })
+        .catch((err) => {
+            console.error('FAILED...', err);
+            alert("Inquiry transmission failed. Please check your credentials.");
+            setIsSending(false);
+        });
     };
 
     const handleChange = (e) => {
@@ -121,7 +133,7 @@ const ContactFooter = () => {
                     <div className="p-3 border border-gold/20 text-gold group-hover:bg-gold group-hover:text-charcoal transition-all duration-500">
                         <Mail className="w-6 h-6" />
                     </div>
-                    <a href="mailto:amishpatel341@gmail.com" className="text-gray-900 dark:text-gray-200 font-body hover:text-gold transition truncate font-medium">amishpatel341@gmail.com</a>
+                    <a href="mailto:mailmeharshita24@gmail.com" className="text-gray-900 dark:text-gray-200 font-body hover:text-gold transition truncate font-medium">mailmeharshita24@gmail.com</a>
                   </div>
                 </div>
               </div>
@@ -164,16 +176,20 @@ const ContactFooter = () => {
                           ></textarea>
                       </div>
                       
-                      <button type="submit" className="w-full mt-6 group flex items-center justify-between bg-gold text-charcoal px-8 py-4 font-heading font-bold text-xs tracking-[0.3em] uppercase transition-all duration-500 hover:bg-charcoal hover:text-gold border border-gold">
-                        Commence Inquiry
-                        <ArrowRight className="w-4 h-4 transform group-hover:translate-x-2 transition-transform" />
+                      <button 
+                        type="submit" 
+                        disabled={isSending}
+                        className={`w-full mt-6 group flex items-center justify-between px-8 py-4 font-heading font-bold text-xs tracking-[0.3em] uppercase transition-all duration-500 border border-gold ${isSending ? 'bg-charcoal text-gold opacity-50 cursor-not-allowed' : 'bg-gold text-charcoal hover:bg-charcoal hover:text-gold'}`}
+                      >
+                        {isSending ? 'Transmitting Inquiry...' : 'Commence Inquiry'}
+                        {!isSending && <ArrowRight className="w-4 h-4 transform group-hover:translate-x-2 transition-transform" />}
                       </button>
                     </form>
                   ) : (
                     <div className="h-64 flex flex-col items-center justify-center text-center space-y-4 animate-in fade-in zoom-in duration-500">
                         <CheckCircle className="w-16 h-16 text-gold" />
-                        <p className="text-gold font-heading text-sm tracking-widest">ENQUIRY TRANSMITTED</p>
-                        <p className="text-gray-500 text-xs font-body italic">Opening your mail client...</p>
+                        <p className="text-gold font-heading text-sm tracking-widest uppercase">Enquiry Managed Successfully</p>
+                        <p className="text-gray-500 text-xs font-body italic">We will respond shortly.</p>
                     </div>
                   )}
                   
