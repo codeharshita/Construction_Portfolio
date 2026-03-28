@@ -6,6 +6,7 @@ import ProjectsSection from "./components/ProjectsSection";
 import ResidentialPortfolio from "./components/ResidentialPortfolio";
 import ContactFooter from "./components/ContactFooter";
 import ScrollToTop from "./components/ScrollToTop";
+import ScrollReveal from "./components/ScrollReveal";
 
 export const ThemeContext = createContext();
 
@@ -32,13 +33,21 @@ function App() {
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <main className="bg-white dark:bg-charcoal text-charcoal dark:text-white min-h-screen transition-colors duration-500">
+      <main className="bg-white dark:bg-charcoal text-charcoal dark:text-white min-h-screen transition-colors duration-500 overflow-x-hidden">
         <Navbar />
         <Hero />
-        <CompanyOverview />
-        <ProjectsSection />
-        <ResidentialPortfolio />
-        <ContactFooter />
+        <ScrollReveal>
+          <CompanyOverview />
+        </ScrollReveal>
+        <ScrollReveal>
+          <ProjectsSection />
+        </ScrollReveal>
+        <ScrollReveal>
+          <ResidentialPortfolio />
+        </ScrollReveal>
+        <ScrollReveal>
+          <ContactFooter />
+        </ScrollReveal>
         <ScrollToTop />
       </main>
     </ThemeContext.Provider>

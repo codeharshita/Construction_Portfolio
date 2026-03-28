@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollReveal from "./ScrollReveal";
 import MainLogo from "../assets/images/MainLogo.png";
 
 const CompanyOverview = () => {
@@ -50,30 +51,34 @@ const CompanyOverview = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-gold/10 border border-gold/10 shadow-2xl">
           
           {/* Card 1 */}
-          <div className="bg-white dark:bg-charcoal p-12 lg:p-16 flex flex-col justify-between group hover:bg-gold/[0.02] transition-all duration-700 relative">
-            <div className="space-y-6">
-              <div className="inline-block px-3 py-1 border border-gold/30 text-[10px] text-gold tracking-[0.3em] uppercase">Principal</div>
-              <h4 className="text-charcoal dark:text-gold font-bold text-3xl lg:text-4xl font-heading tracking-tight uppercase">Jayantibhai Patel</h4>
-              <div className="h-px w-full bg-gradient-to-r from-gold/40 to-transparent"></div>
+          <ScrollReveal delay={0.1} yOffset={20} className="h-full">
+            <div className="bg-white dark:bg-charcoal p-12 lg:p-16 flex flex-col justify-between h-full group hover:bg-gold/[0.02] transition-all duration-700 relative">
+              <div className="space-y-6">
+                <div className="inline-block px-3 py-1 border border-gold/30 text-[10px] text-gold tracking-[0.3em] uppercase">Principal</div>
+                <h4 className="text-charcoal dark:text-gold font-bold text-3xl lg:text-4xl font-heading tracking-tight uppercase">Jayantibhai Patel</h4>
+                <div className="h-px w-full bg-gradient-to-r from-gold/40 to-transparent"></div>
+              </div>
+              <div className="mt-12">
+                <p className="text-gray-900 dark:text-gray-300 font-body text-sm tracking-[0.2em] uppercase font-bold">Chief Civil Engineer</p>
+                <p className="text-xs text-gold font-heading mt-1 tracking-widest uppercase opacity-70">Structural Consultant • 30+ Years Exp.</p>
+              </div>
             </div>
-            <div className="mt-12">
-              <p className="text-gray-900 dark:text-gray-300 font-body text-sm tracking-[0.2em] uppercase font-bold">Chief Civil Engineer</p>
-              <p className="text-xs text-gold font-heading mt-1 tracking-widest uppercase opacity-70">Structural Consultant • 30+ Years Exp.</p>
-            </div>
-          </div>
+          </ScrollReveal>
 
           {/* Card 2 */}
-          <div className="bg-white dark:bg-charcoal p-12 lg:p-16 flex flex-col justify-between group hover:bg-gold/[0.02] transition-all duration-700 relative">
-            <div className="space-y-6">
-              <div className="inline-block px-3 py-1 border border-gold/30 text-[10px] text-gold tracking-[0.3em] uppercase">Leadership</div>
-              <h4 className="text-charcoal dark:text-gold font-bold text-3xl lg:text-4xl font-heading tracking-tight uppercase">Er. Amish Patel</h4>
-              <div className="h-px w-full bg-gradient-to-r from-gold/40 to-transparent"></div>
+          <ScrollReveal delay={0.2} yOffset={20} className="h-full">
+            <div className="bg-white dark:bg-charcoal p-12 lg:p-16 flex flex-col justify-between h-full group hover:bg-gold/[0.02] transition-all duration-700 relative">
+              <div className="space-y-6">
+                <div className="inline-block px-3 py-1 border border-gold/30 text-[10px] text-gold tracking-[0.3em] uppercase">Leadership</div>
+                <h4 className="text-charcoal dark:text-gold font-bold text-3xl lg:text-4xl font-heading tracking-tight uppercase">Er. Amish Patel</h4>
+                <div className="h-px w-full bg-gradient-to-r from-gold/40 to-transparent"></div>
+              </div>
+              <div className="mt-12">
+                <p className="text-gray-900 dark:text-gray-300 font-body text-sm tracking-[0.2em] uppercase font-bold">Executive Civil Engineer</p>
+                <p className="text-xs text-gold font-heading mt-1 tracking-widest uppercase opacity-70">Operations Director • B.E. Civil</p>
+              </div>
             </div>
-            <div className="mt-12">
-              <p className="text-gray-900 dark:text-gray-300 font-body text-sm tracking-[0.2em] uppercase font-bold">Executive Civil Engineer</p>
-              <p className="text-xs text-gold font-heading mt-1 tracking-widest uppercase opacity-70">Operations Director • B.E. Civil</p>
-            </div>
-          </div>
+          </ScrollReveal>
 
         </div>
 

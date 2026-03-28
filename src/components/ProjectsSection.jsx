@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollReveal from "./ScrollReveal";
 import MilanAuraImg from "../assets/images/MilanAura.jpeg";
 import PurvaDeepImg from "../assets/images/PurvaDeep.jpeg";
 import PrestigeImg from "../assets/images/PrestigeBuilding.jpeg";
@@ -66,65 +67,66 @@ const ProjectsSection = () => {
   
           <div className="space-y-32">
             {projects.map((project, index) => (
-              <div 
-                key={project.id} 
-                className={`flex flex-col lg:flex-row gap-12 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}
-              >
-                {/* Visual Section */}
-                <div className="w-full lg:w-3/5 relative overflow-hidden group shadow-2xl border border-gold/30">
-                  {project.image ? (
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-110"
-                    />
-                  ) : (
-                    <div className="aspect-video bg-gold/5 dark:bg-white/5 flex items-center justify-center">
-                      <div className="text-gold font-heading text-xs uppercase tracking-[0.5em] opacity-40">
-                        [ PROJECT ELEVATION / SITE VISUAL ]
+              <ScrollReveal key={project.id} delay={index * 0.1}>
+                <div 
+                  className={`flex flex-col lg:flex-row gap-12 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}
+                >
+                  {/* Visual Section */}
+                  <div className="w-full lg:w-3/5 relative overflow-hidden group shadow-2xl border border-gold/30">
+                    {project.image ? (
+                      <img 
+                        src={project.image} 
+                        alt={project.title} 
+                        className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-110"
+                      />
+                    ) : (
+                      <div className="aspect-video bg-gold/5 dark:bg-white/5 flex items-center justify-center">
+                        <div className="text-gold font-heading text-xs uppercase tracking-[0.5em] opacity-40">
+                          [ PROJECT ELEVATION / SITE VISUAL ]
+                        </div>
                       </div>
+                    )}
+                    <div className="absolute inset-0 bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+                    <div className="absolute top-4 left-4 text-gold border border-gold/30 px-3 py-1 bg-charcoal/80 backdrop-blur-sm font-heading text-xs tracking-widest z-10 transition-colors duration-500">
+                      #{project.id}
                     </div>
-                  )}
-                  <div className="absolute inset-0 bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
-                  <div className="absolute top-4 left-4 text-gold border border-gold/30 px-3 py-1 bg-charcoal/80 backdrop-blur-sm font-heading text-xs tracking-widest z-10 transition-colors duration-500">
-                    #{project.id}
+                  </div>
+    
+                  {/* Project Details */}
+                  <div className="w-full lg:w-2/5 space-y-6">
+                    <span className="text-gold-hover dark:text-gold-light font-heading text-sm tracking-[0.3em] uppercase opacity-70">
+                      {project.type}
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-heading text-gold tracking-widest leading-none">
+                      {project.title}
+                    </h3>
+                    <div className="flex flex-col gap-2 font-body text-xs tracking-widest uppercase text-gray-700 dark:text-gray-400">
+                      <p><span className="text-gold">STATUS:</span> {project.status}</p>
+                      {project.value && <p><span className="text-gold">VALUE:</span> {project.value}</p>}
+                      {project.scale && <p><span className="text-gold">SCALE:</span> {project.scale}</p>}
+                    </div>
+                    
+                    <div className="h-px bg-gold opacity-30 w-16"></div>
+    
+                    <div className="space-y-6 pt-4">
+                      <div className="flex items-center gap-3">
+                        <div className="h-px w-8 bg-gold/50"></div>
+                        <h4 className="text-gold font-heading text-xs tracking-[0.3em] uppercase font-bold">Technical Chronicles</h4>
+                      </div>
+                      <ul className="space-y-5">
+                        {project.highlights.map((highlight, i) => (
+                          <li key={i} className="flex items-start group">
+                            <span className="mt-2 w-1.5 h-1.5 bg-gold flex-shrink-0 rotate-45 group-hover:rotate-0 transition-transform duration-300"></span>
+                            <span className="ml-5 text-gray-700 dark:text-gray-200 font-body text-base md:text-lg leading-relaxed font-light">
+                              {highlight}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
-  
-                {/* Project Details */}
-                <div className="w-full lg:w-2/5 space-y-6">
-                  <span className="text-gold-hover dark:text-gold-light font-heading text-sm tracking-[0.3em] uppercase opacity-70">
-                    {project.type}
-                  </span>
-                  <h3 className="text-3xl md:text-4xl font-heading text-gold tracking-widest leading-none">
-                    {project.title}
-                  </h3>
-                  <div className="flex flex-col gap-2 font-body text-xs tracking-widest uppercase text-gray-700 dark:text-gray-400">
-                    <p><span className="text-gold">STATUS:</span> {project.status}</p>
-                    {project.value && <p><span className="text-gold">VALUE:</span> {project.value}</p>}
-                    {project.scale && <p><span className="text-gold">SCALE:</span> {project.scale}</p>}
-                  </div>
-                  
-                  <div className="h-px bg-gold opacity-30 w-16"></div>
-  
-                  <div className="space-y-6 pt-4">
-                    <div className="flex items-center gap-3">
-                      <div className="h-px w-8 bg-gold/50"></div>
-                      <h4 className="text-gold font-heading text-xs tracking-[0.3em] uppercase font-bold">Technical Chronicles</h4>
-                    </div>
-                    <ul className="space-y-5">
-                      {project.highlights.map((highlight, i) => (
-                        <li key={i} className="flex items-start group">
-                          <span className="mt-2 w-1.5 h-1.5 bg-gold flex-shrink-0 rotate-45 group-hover:rotate-0 transition-transform duration-300"></span>
-                          <span className="ml-5 text-gray-700 dark:text-gray-200 font-body text-base md:text-lg leading-relaxed font-light">
-                            {highlight}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
