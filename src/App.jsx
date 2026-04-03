@@ -2,8 +2,8 @@ import  { useState, useEffect, createContext } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import CompanyOverview from "./components/CompanyOverview";
+import OurExpertise from "./components/OurExpertise";
 import ProjectsSection from "./components/ProjectsSection";
-import ResidentialPortfolio from "./components/ResidentialPortfolio";
 import ContactFooter from "./components/ContactFooter";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollReveal from "./components/ScrollReveal";
@@ -40,10 +40,10 @@ function App() {
           <CompanyOverview />
         </ScrollReveal>
         <ScrollReveal>
-          <ProjectsSection />
+          <OurExpertise />
         </ScrollReveal>
         <ScrollReveal>
-          <ResidentialPortfolio />
+          <ProjectsSection />
         </ScrollReveal>
         <ScrollReveal>
           <ContactFooter />
