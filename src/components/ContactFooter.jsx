@@ -1,13 +1,15 @@
 import React, { useState, useRef } from 'react';
-import { Phone, Mail, MapPin, Wrench, ArrowRight, CheckCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Wrench, ArrowRight, CheckCircle, Paperclip } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 
 const ContactFooter = () => {
+    const formRef = useRef();
+    const [file, setFile] = useState(null);
     const [formData, setFormData] = useState({
         name: '',
         contact: '',
-        scope: ''
+        message: ''
     });
     const [submitted, setSubmitted] = useState(false);
     const [isSending, setIsSending] = useState(false);
@@ -15,33 +17,27 @@ const ContactFooter = () => {
     const handleEnquiry = (e) => {
         e.preventDefault();
         
-        const { name, contact, scope } = formData;
+        const { name, contact, message } = formData;
         
-        if (!name || !contact || !scope) {
+        if (!name || !contact || !message) {
             alert("Please complete all professional credentials.");
             return;
         }
 
         setIsSending(true);
 
-        const templateParams = {
-            name: name,
-            contact: contact,
-            message: scope,
-            time: new Date().toLocaleString()
-        };
-
-        emailjs.send(
+        emailjs.sendForm(
             import.meta.env.VITE_EMAILJS_SERVICE_ID,
             import.meta.env.VITE_EMAILJS_TEMPLATE,
-            templateParams,
+            formRef.current,
             import.meta.env.VITE_EMAILJS_PUBLIC_KEY
         )
         .then((response) => {
             console.log('SUCCESS!', response.status, response.text);
             setSubmitted(true);
             setIsSending(false);
-            setFormData({ name: '', contact: '', scope: '' });
+            setFormData({ name: '', contact: '', message: '' });
+            setFile(null);
             setTimeout(() => setSubmitted(false), 5000);
         })
         .catch((err) => {
@@ -57,10 +53,13 @@ const ContactFooter = () => {
     };
 
     const machinery = [
-      "Dual Concrete Mixers",
-      "Mechanical Hoists",
-      "Digital Surveying Tools",
-      "Mobile Power Units"
+      "Tower cranes",
+      "Material hoists",
+      "Passenger hoists",
+      "Concrete mixers",
+      "Vibrators",
+      "Bar cutting machine",
+      "Bar bending machine"
     ];
 
     return (
@@ -78,7 +77,7 @@ const ContactFooter = () => {
             <div className="lg:col-span-4 space-y-12">
               <div className="space-y-4">
                 <h2 className="text-4xl font-heading text-gold tracking-tighter uppercase">Patel <br /> Construction</h2>
-                <p className="text-gray-700 dark:text-gray-400 font-body text-sm tracking-widest uppercase italic font-medium">Est. 1998 — Maharashtra</p>
+                <p className="text-gray-700 dark:text-gray-400 font-body text-sm tracking-widest uppercase italic font-medium">Est. 1995 — Maharashtra</p>
               </div>
 
               <div className="space-y-6">
@@ -133,7 +132,7 @@ const ContactFooter = () => {
                     <div className="p-3 border border-gold/20 text-gold group-hover:bg-gold group-hover:text-charcoal transition-all duration-500">
                         <Mail className="w-6 h-6" />
                     </div>
-                    <a href="mailto:mailmeharshita24@gmail.com" className="text-gray-900 dark:text-gray-200 font-body hover:text-gold transition truncate font-medium">mailmeharshita24@gmail.com</a>
+                    <a href="mailto:amishpatel341@gmail.com" className="text-gray-900 dark:text-gray-200 font-body hover:text-gold transition truncate font-medium">amishpatel341@gmail.com</a>
                   </div>
                 </div>
               </div>
@@ -144,7 +143,8 @@ const ContactFooter = () => {
                   <h4 className="text-gold font-heading text-xs tracking-[0.5em] uppercase mb-10 font-black">Project Inquiry</h4>
                   
                   {!submitted ? (
-                    <form onSubmit={handleEnquiry} className="space-y-6 relative z-10">
+                    <form ref={formRef} onSubmit={handleEnquiry} className="space-y-6 relative z-10" encType="multipart/form-data">
+                      <input type="hidden" name="time" value={new Date().toLocaleString()} />
                       <div className="group/input relative">
                           <input 
                             name="name"
@@ -167,13 +167,29 @@ const ContactFooter = () => {
                       </div>
                       <div className="group/input relative">
                           <textarea 
-                            name="scope"
-                            value={formData.scope}
+                            name="message"
+                            value={formData.message}
                             onChange={handleChange}
                             rows="2" 
                             placeholder="BRIEF PROJECT SCOPE" 
                             className="w-full bg-transparent border-b border-gold/30 py-3 text-charcoal dark:text-white text-sm font-heading tracking-widest focus:outline-none focus:border-gold transition-all placeholder:text-gray-500 resize-none"
                           ></textarea>
+                      </div>
+                      
+                      {/* Attachment Field */}
+                      <div className="group/input relative flex items-center border-b border-gold/30 pt-2 pb-3">
+                          <input 
+                            type="file" 
+                            name="attachment"
+                            id="file-upload"
+                            onChange={(e) => setFile(e.target.files[0])}
+                            className="hidden"
+                            accept=".pdf, image/*"
+                          />
+                          <label htmlFor="file-upload" className="flex items-center gap-3 cursor-pointer text-gray-500 hover:text-gold transition-colors w-full group-hover/input:text-gold">
+                              <Paperclip className="w-5 h-5 flex-shrink-0" />
+                              <span className="text-sm font-heading tracking-widest truncate">{file ? file.name : "ATTACH PDF OR IMAGE (OPTIONAL)"}</span>
+                          </label>
                       </div>
                       
                       <button 

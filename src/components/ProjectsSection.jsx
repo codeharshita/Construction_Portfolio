@@ -7,9 +7,118 @@ import PanvelImg from "../assets/images/FarmhousePanvel.png";
 import PerryImg from "../assets/images/PerryApartment.jpeg";
 import QuantumImg from "../assets/images/Quantum.jpeg";
 import PrestigeImg2 from "../assets/images/PRESTIGE.jpeg";
+import BharatImg from "../assets/images/Bharat Apartment.jpeg";
+import PrestigeIndImg from "../assets/images/Prestige Industrial.jpeg";
+import VikasImg from "../assets/images/Vikas Park.jpeg";
+import LeelaImg from "../assets/images/Leela Nagar.webp";
+import SaiImg from "../assets/images/Sai darshan.jpg";
+import PleasantImg from "../assets/images/Pleasant Park.webp";
+import ValiramImg from "../assets/images/Valiram Mention.jpg";
 
 
 const ProjectsSection = () => {
+  const pastProjectsData = [
+    {
+      id: "BHARAT",
+      title: "BHARAT APARTMENT",
+      image: BharatImg,
+      year: "2005, 2013 & 2014",
+      category: "",
+      area: "~1,50,000 sq.ft.",
+      floors: "Ground + 16 Storeys (4 Wing)",
+      scope: "Civil Work.",
+      location: "Malad, Mumbai – 400064",
+      desc: "Massive residential development spanning multiple construction phases.",
+    },
+    {
+      id: "PEARL",
+      title: "PEARL APARTMENT",
+      year: "2005",
+      category: "",
+      area: "~15,000 sq.ft.",
+      floors: "Ground + 7 Storeys",
+      scope: "Civil Work.",
+      location: "Malad, Mumbai – 400064",
+      desc: "Comprehensive civil construction for mid-rise residential living.",
+    },
+    {
+      id: "PRESTIGE",
+      title: "PRESTIGE INDUSTRIES",
+      image: PrestigeIndImg,
+      imgStyle: { transform: "rotate(-90deg) scale(0.65)" },
+      year: "2005",
+      category: "",
+      area: "~60,000 sq.ft.",
+      floors: "-1 + Ground + 6 Storeys",
+      scope: "Civil + Finishing Work.",
+      location: "Malad, Mumbai – 400064",
+      desc: "Robust industrial structure with comprehensive finishing works.",
+    },
+    {
+      id: "SAI",
+      title: "SAI DARSHAN",
+      image: SaiImg,
+      imgClass: "!w-[75%] mx-auto p-4 md:p-8",
+      year: "1993",
+      category: "",
+      area: "~40,000 sq.ft.",
+      floors: null,
+      scope: "Civil work.",
+      location: "Chembur",
+      desc: "Dedicated structural and civil works for residential housing.",
+    },
+    {
+      id: "VIKAS",
+      title: "VIKAS PARK",
+      image: VikasImg,
+      year: "1991",
+      category: "",
+      area: "~90,890 sq.ft.",
+      floors: "Ground + 14 Storeys (4 Wing)",
+      scope: "Civil + Finishing Work.",
+      location: "Malad, Mumbai – 400064",
+      desc: "High-rise multi-wing residential project with extensive structural detailing.",
+    },
+    {
+      id: "LEELA",
+      title: "LEELA NAGAR",
+      image: LeelaImg,
+      cropBottom: true,
+      year: "1990",
+      category: "",
+      area: "~50,000 sq.ft.",
+      floors: null,
+      scope: "Civil + Finishing Work.",
+      location: "Andheri, Mumbai – 400064",
+      desc: "End-to-end civil and finishing execution for premium housing.",
+    },
+    {
+      id: "PLEASANT",
+      title: "PLEASANT PARK",
+      image: PleasantImg,
+      cropBottom: true,
+      year: "1989",
+      category: "",
+      area: "~84,480 sq.ft.",
+      floors: "Ground + 6 Storeys (4 Wing)",
+      scope: "Civil + Finishing Work.",
+      location: "Malad, Mumbai – 400064",
+      desc: "Large scale multi-wing residential complex execution.",
+    },
+    {
+      id: "VALIRAM",
+      title: "VALIRAM MENTION",
+      image: ValiramImg,
+      year: "1985",
+      category: "",
+      area: "~30,000 sq.ft.",
+      floors: "Ground + 9 Storeys",
+      scope: "Civil Work.",
+      location: "Malad Mumbai – 400064",
+      desc: "Delivered structural excellence and civil works.",
+    }
+  ];
+
   const projects = [
 
     {
@@ -408,58 +517,70 @@ const ProjectsSection = () => {
             <div className="w-32 h-[2px] bg-gradient-to-r from-transparent via-gold/50 to-transparent mt-8"></div>
           </div>
 
-          {/* Placeholder Past Project Block */}
-          <ScrollReveal delay={0.1}>
-            <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-center">
-              {/* Image Section */}
-              <div className="w-full lg:w-3/5 group relative z-10">
-                <div className="overflow-hidden border border-gold/20 shadow-2xl relative bg-charcoal/5 dark:bg-white/5">
-                  <img
-                    src={PrestigeImg2}
-                    alt="Prestige Building Past Project"
-                    className="w-full h-auto object-contain transition-transform duration-[2000ms] ease-out group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-charcoal/20 group-hover:bg-transparent transition-colors duration-700"></div>
-                </div>
+          <div className="space-y-32">
+            {pastProjectsData.map((project, index) => (
+              <ScrollReveal key={project.id} delay={0.1}>
+                <div className={`flex flex-col lg:flex-row gap-12 lg:gap-24 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
+                  {/* Image Section */}
+                  <div className="w-full lg:w-1/2 xl:w-5/12 group relative z-10">
+                    <div className="overflow-hidden border border-gold/20 shadow-2xl relative bg-charcoal/5 dark:bg-white/5">
+                      {project.image ? (
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          style={{
+                            ...(project.cropBottom ? { clipPath: "inset(0 0 12% 0)", marginBottom: "-12%" } : {}),
+                            ...(project.imgStyle || {})
+                          }}
+                          className={`w-full h-auto object-contain transition-transform duration-[2000ms] ease-out group-hover:scale-105 contrast-[1.15] saturate-[1.1] brightness-[1.05] filter ${project.imgClass || ""}`}
+                        />
+                      ) : (
+                        <div className="aspect-[4/3] bg-gold/5 dark:bg-white/5 flex items-center justify-center">
+                          <div className="text-gold font-heading text-xs uppercase tracking-[0.5em] opacity-40">
+                            [ PROJECT IMAGE PENDING ]
+                          </div>
+                        </div>
+                      )}
+                      <div className="absolute inset-0 bg-charcoal/20 group-hover:bg-transparent transition-colors duration-700 pointer-events-none"></div>
+                    </div>
 
-                {/* Badge */}
-                <div className="absolute -bottom-6 right-4 md:-right-8 z-20 hover:scale-105 transition-transform duration-300">
-                  <div className="inline-block bg-[#c5a059] px-6 py-2 md:px-8 md:py-3 rounded-[2rem] shadow-xl border-4 border-white dark:border-charcoal">
-                    <span className="text-[#1a1a1a] font-heading text-lg md:text-xl font-black tracking-widest uppercase">YYYY - YYYY</span>
+                    {/* Badge */}
+                    <div className={`absolute -bottom-6 ${index % 2 !== 0 ? 'left-4 md:-left-8' : 'right-4 md:-right-8'} z-20 hover:scale-105 transition-transform duration-300`}>
+                      <div className="inline-block bg-[#c5a059] px-6 py-2 md:px-8 md:py-3 rounded-[2rem] shadow-xl border-4 border-white dark:border-charcoal">
+                        <span className="text-[#1a1a1a] font-heading text-lg md:text-xl font-black tracking-widest uppercase">{project.year}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Info Section */}
+                  <div className="w-full lg:w-1/2 xl:w-7/12 space-y-8 lg:px-6 relative">
+                    <div className="space-y-4">
+                      {project.category && <span className="text-gold font-heading text-sm tracking-[0.4em] uppercase font-medium">{project.category}</span>}
+                      <h3 className="text-4xl md:text-5xl font-heading text-charcoal dark:text-gold tracking-tight uppercase leading-none">
+                        {project.title}
+                      </h3>
+                      <div className="h-px w-24 bg-gradient-to-r from-gold to-transparent"></div>
+                    </div>
+
+                    {project.desc && (
+                      <p className="text-gray-800 dark:text-gray-300 font-body text-xl font-bold italic leading-relaxed">
+                        "{project.desc}"
+                      </p>
+                    )}
+
+                    <div className="space-y-3 pt-2">
+                      <p className="text-gray-800 dark:text-gray-200 font-body text-sm md:text-base font-medium">📐 <span className="font-bold ml-2 text-charcoal dark:text-white">Area:</span> {project.area}</p>
+                      {project.floors && (
+                        <p className="text-gray-800 dark:text-gray-200 font-body text-sm md:text-base font-medium">🏢 <span className="font-bold ml-2 text-charcoal dark:text-white">Floors:</span> {project.floors}</p>
+                      )}
+                      <p className="text-gray-800 dark:text-gray-200 font-body text-sm md:text-base font-medium">🛠 <span className="font-bold ml-2 text-charcoal dark:text-white">Scope:</span> {project.scope}</p>
+                      <p className="text-gray-800 dark:text-gray-200 font-body text-sm md:text-base font-medium">📍 <span className="font-bold ml-2 text-charcoal dark:text-white">Location:</span> {project.location}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Info Section */}
-              <div className="w-full lg:w-2/5 space-y-8 relative">
-                <div className="space-y-4">
-                  <span className="text-gold font-heading text-sm tracking-[0.4em] uppercase font-medium">PROJECT CATEGORY</span>
-                  <h3 className="text-4xl md:text-5xl font-heading text-charcoal dark:text-gold tracking-tight uppercase leading-none">
-                    PROJECT NAME
-                  </h3>
-                  <div className="h-px w-24 bg-gradient-to-r from-gold to-transparent"></div>
-                </div>
-
-                <p className="text-gray-800 dark:text-gray-300 font-body text-xl font-bold italic leading-relaxed">
-                  "Short descriptive quote or highlight about this past project's impact, significance, and scale."
-                </p>
-
-                <div className="space-y-3 pt-2">
-                  <p className="text-gray-800 dark:text-gray-200 font-body text-sm md:text-base font-medium">📐 <span className="font-bold ml-2 text-charcoal dark:text-white">Area:</span> ~0,000 sq.ft.</p>
-                  <p className="text-gray-800 dark:text-gray-200 font-body text-sm md:text-base font-medium">🏢 <span className="font-bold ml-2 text-charcoal dark:text-white">Structure:</span> Configuration details...</p>
-                  <p className="text-gray-800 dark:text-gray-200 font-body text-sm md:text-base font-medium">🛠 <span className="font-bold ml-2 text-charcoal dark:text-white">Scope:</span> Civil & Structural Details...</p>
-                  <p className="text-gray-800 dark:text-gray-200 font-body text-sm md:text-base font-medium">📍 <span className="font-bold ml-2 text-charcoal dark:text-white">Location:</span> Project Location...</p>
-                </div>
-
-                <p className="text-gray-700 dark:text-gray-400 font-body text-sm md:text-base leading-relaxed font-medium">
-                  Detailed paragraph explaining the execution strategy, challenges overcome, or the key deliverables of the project to emphasize industry credibility and competence.
-                </p>
-                <p className="text-gray-700 dark:text-gray-400 font-body text-sm md:text-base leading-relaxed font-medium">
-                  Secondary paragraph highlighting structural or architectural specifics that demonstrate expertise, material selection, or milestone achievements.
-                </p>
-              </div>
-            </div>
-          </ScrollReveal>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
