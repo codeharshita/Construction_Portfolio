@@ -213,7 +213,7 @@ const ContactFooter = () => {
             </p>
             <div className="flex gap-8">
                 <span className="text-[14px] text-gold font-heading tracking-[0.2em] uppercase cursor-pointer hover:opacity-100 opacity-60 transition-opacity">Privacy Policy</span>
-                <span className="text-[14px] text-gold font-heading tracking-[0.2em] uppercase cursor-pointer hover:opacity-100 opacity-60 transition-opacity">Terms of Service</span>
+                <span className="text-[14px] text-gold font-heading tracking-[0.2em] uppercase  cursor-pointer hover:opacity-100 opacity-60 transition-opacity">Terms of Service</span>
             </div>
           </div>
         </div>
