@@ -5,7 +5,6 @@ import emailjs from '@emailjs/browser';
 
 const ContactFooter = () => {
     const formRef = useRef();
-    const [file, setFile] = useState(null);
     const [formData, setFormData] = useState({
         name: '',
         contact: '',
@@ -37,7 +36,6 @@ const ContactFooter = () => {
             setSubmitted(true);
             setIsSending(false);
             setFormData({ name: '', contact: '', message: '' });
-            setFile(null);
             setTimeout(() => setSubmitted(false), 5000);
         })
         .catch((err) => {
@@ -170,28 +168,19 @@ const ContactFooter = () => {
                             name="message"
                             value={formData.message}
                             onChange={handleChange}
-                            rows="2" 
+                            rows="3" 
                             placeholder="BRIEF PROJECT SCOPE" 
-                            className="w-full bg-transparent border-b border-gold/30 py-3 text-charcoal dark:text-white text-sm font-heading tracking-widest focus:outline-none focus:border-gold transition-all placeholder:text-gray-500 resize-none"
+                            className="w-full bg-transparent border-b border-gold/30 py-3 text-charcoal dark:text-white text-sm font-heading tracking-widest focus:outline-none focus:border-gold transition-all placeholder:text-gray-500 resize-none uppercase"
                           ></textarea>
+                          
+                          {/* High-Visibility Attachment Instruction */}
+                          <div className="mt-6 p-4 bg-gold/5 border-l-2 border-gold/40 flex items-start gap-4 transition-all duration-500 group-hover:bg-gold/10">
+                             <Paperclip className="w-4 h-4 text-gold mt-0.5 shrink-0" />
+                             <p className="text-xs text-gray-500 dark:text-gray-300 font-heading tracking-widest leading-relaxed uppercase">
+                                For attachments (Blueprints / Elevations), please provide a secure link from Google Drive or Dropbox in your message above.
+                             </p>
+                          </div>
                       </div>
-                      
-                      {/* Attachment Field */}
-                      <div className="group/input relative flex items-center border-b border-gold/30 pt-2 pb-3">
-                          <input 
-                            type="file" 
-                            name="attachment"
-                            id="file-upload"
-                            onChange={(e) => setFile(e.target.files[0])}
-                            className="hidden"
-                            accept=".pdf, image/*"
-                          />
-                          <label htmlFor="file-upload" className="flex items-center gap-3 cursor-pointer text-gray-500 hover:text-gold transition-colors w-full group-hover/input:text-gold">
-                              <Paperclip className="w-5 h-5 flex-shrink-0" />
-                              <span className="text-sm font-heading tracking-widest truncate">{file ? file.name : "ATTACH PDF OR IMAGE (OPTIONAL)"}</span>
-                          </label>
-                      </div>
-                      
                       <button 
                         type="submit" 
                         disabled={isSending}
